@@ -1,0 +1,12 @@
+# Bỏ qua thư mục __pycache__ ở tất cả các cấp
+__pycache__/
+
+# Bỏ qua tất cả file bytecode Python
+*.pyc
+*.pyo
+
+# Bỏ qua các file khác sinh ra từ môi trường ảo hoặc Python
+*.pyd
+*.pdm
+*.egg-info/
+.eggs/
