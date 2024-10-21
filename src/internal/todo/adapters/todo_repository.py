@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from src.application.port.todo_repository import TodoRepository as ITodoRepository
-from src.domain.todo import Todo
+from src.internal.todo.application.port.todo_repository import TodoRepository as ITodoRepository
+from src.internal.todo.domain.todo import Todo
 
 class TodoRepository(ITodoRepository):
     def __init__(self, session: Session):
@@ -22,4 +22,5 @@ class TodoRepository(ITodoRepository):
             raise e # Handle the exception
         finally:
             self.__session.close()
+
         return todo

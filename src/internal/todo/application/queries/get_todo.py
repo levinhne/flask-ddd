@@ -1,6 +1,6 @@
-from src.application.queries.query import Query
-from src.domain.todo import Todo 
-from src.application.port.todo_repository import TodoRepository as ITodoRepository
+from src.internal.todo.application.queries.query import Query
+from src.internal.todo.domain.todo import Todo 
+from src.internal.todo.application.port.todo_repository import TodoRepository as ITodoRepository
 
 class GetTodoByID(Query):
     def __init__(self, id: int):
@@ -23,7 +23,5 @@ class GetTodoHandler():
     def handle(self, query: Query) -> Todo:
         if isinstance(query, GetTodoByID):
             return self.__repository.get_todo_by_id(query.id)
-        elif isinstance(query, GetTodoByTitle):
-            return self.__repository.get_todo_by_title(query.title)
         else:
             raise Exception("Query not found")

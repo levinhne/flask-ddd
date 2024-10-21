@@ -1,14 +1,13 @@
 from abc import ABC, abstractmethod
-from src.domain.todo import Todo
-from src.application.queries.query import Query
-from src.application.queries.get_todo import GetTodoHandler
-from src.application.port.todo_repository import TodoRepository as ITodoRepository
+from src.internal.todo.domain.todo import Todo
+from src.internal.todo.application.queries.query import Query
+from src.internal.todo.application.queries.get_todo import GetTodoHandler
+from src.internal.todo.application.port.todo_repository import TodoRepository as ITodoRepository
 
 class ServiceApplication(ABC):
     @abstractmethod
-    def get_todo_by_id(self, id:int) -> dict:
+    def get_todo_by_id(self, query: Query) -> Todo:
         pass
-
 
 class Queries():
     def __init__(self, repository: ITodoRepository) -> None:

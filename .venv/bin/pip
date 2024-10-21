@@ -1,4 +1,4 @@
-#!/Users/test/Develop/flask-minimal-app/.venv/bin/python3.12
+#!/home/levinhne/Develop/flask-ddd/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
