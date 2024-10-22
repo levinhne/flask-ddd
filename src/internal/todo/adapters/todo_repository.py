@@ -7,6 +7,16 @@ class TodoRepository(ITodoRepository):
     def __init__(self, session: scoped_session):
         self.__session = session
 
+    def create_todo(self, todo: Todo) -> None:
+        try:
+            self.__session.add(todo)
+            self.__session.commit()
+        except Exception as e:
+            self.__session.rollback()
+            raise RuntimeError(f"Database error: {e}")
+        finally:
+            self.__session.close()
+
     def list_todos(self) -> list[Todo]:
         try:
             todos = self.__session.query(Todo).all()

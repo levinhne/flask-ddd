@@ -1,7 +1,7 @@
 from flask import Flask
 
 from src.config import config
-from src.extensions import register_extensions
+from src.extensions import db, register_extensions
 from src.internal.todo import register_blueprints as todo_register_blueprints
 
 
@@ -12,6 +12,7 @@ def create_app():
 
     todo_register_blueprints(app)
     register_extensions(app)
+
 
     return app
 

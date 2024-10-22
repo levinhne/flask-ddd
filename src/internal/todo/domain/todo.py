@@ -24,3 +24,9 @@ class Todo(db.Model):
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }
+    
+    def from_dict(data):
+        return Todo(
+            title=data.get("title"),
+            completed=data.get("completed"),
+        )
