@@ -1,21 +1,23 @@
 from sqlalchemy.orm import scoped_session
-from src.internal.todo.application.port.todo_repository import TodoRepository as ITodoRepository
-from src.internal.todo.domain.todo import Todo
-from src.internal.todo.domain.todo import NotFoundError
+
+from src.todo.application.port.todo_repository import TodoRepository as ITodoRepository
+from src.todo.domain.todo import NotFoundError, Todo
+
 
 class TodoRepository(ITodoRepository):
     def __init__(self, session: scoped_session):
         self.__session = session
 
     def create_todo(self, todo: Todo) -> None:
+        session = self.__session
         try:
-            self.__session.add(todo)
-            self.__session.commit()
+            session.add(todo)
+            session.commit()
         except Exception as e:
-            self.__session.rollback()
+            session.rollback()
             raise RuntimeError(f"Database error: {e}")
         finally:
-            self.__session.close()
+            session.close()
 
     def list_todos(self) -> list[Todo]:
         try:
@@ -36,4 +38,3 @@ class TodoRepository(ITodoRepository):
             raise RuntimeError(f"Database error: {e}")
         finally:
             self.__session.close()
-

@@ -1,6 +1,6 @@
-from src.internal.todo.application.queries.query import Query
-from src.internal.todo.domain.todo import Todo 
-from src.internal.todo.application.port.todo_repository import TodoRepository as ITodoRepository
+from src.todo.application.queries.query import Query
+from src.todo.domain.todo import Todo 
+from src.todo.application.port.todo_repository import TodoRepository as ITodoRepository
 
 class GetTodoByID(Query):
     def __init__(self, id: int):
