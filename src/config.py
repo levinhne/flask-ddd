@@ -8,8 +8,7 @@ class Config(object):
     DEBUG = False
     SECRET_KEY = os.getenv("SECRET_KEY", os.urandom(16).hex())
 
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", SQLITE_DB)
+    DATABASE_URL = os.getenv("DATABASE_URL", SQLITE_DB)
 
     CELERY_TIMEZONE = os.getenv("CELERY_TIMEZONE", "Europe/Berlin")
     BROKER_URL = os.getenv("BROKER_URL", "redis://localhost:6379/0")

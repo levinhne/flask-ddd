@@ -1,12 +1,14 @@
-from src.todo.application.port.todo_repository import (
-    TodoRepository as ITodoRepository,
-)
+from dataclasses import dataclass
+
+from src.todo.application.port.todo_repository import TodoRepository as ITodoRepository
 from src.todo.application.queries.query import Query
-from src.todo.domain.todo import Todo
+from src.todo.domain import Todo
 
 
+@dataclass
 class ListTodos(Query):
-    def is_query():
+
+    def is_query(self):
         pass
 
 

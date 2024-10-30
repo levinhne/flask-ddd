@@ -1,20 +1,22 @@
 from datetime import datetime
 
-from src.extensions import db
+from sqlalchemy import Boolean, Column, DateTime, Integer, String
+from sqlalchemy.orm import declarative_base
+
+Base = declarative_base()
 
 
 class NotFoundError(Exception):
     pass
 
-
-class Todo(db.Model):
+class Todo(Base):
     __tablename__ = "todos"
 
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    completed = db.Column(db.Boolean, default=False)
-    created_at = db.Column(db.DateTime, default=datetime.now())
-    updated_at = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now())
+    id = Column(Integer, primary_key=True)
+    title = Column(String(100), nullable=False)
+    completed = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=datetime.now())
+    updated_at = Column(DateTime, default=datetime.now(), onupdate=datetime.now())
 
     def to_dict(self):
         """Return a dictionary representation of the Todo object."""

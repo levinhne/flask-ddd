@@ -1,12 +1,14 @@
+from dataclasses import dataclass
+
 from src.todo.application.port.todo_repository import TodoRepository as ITodoRepository
-from src.todo.domain.todo import Todo
+from src.todo.domain import Todo
 
 
+@dataclass
 class CreateTodoCommand:
     """CreateTodoCommand is a command to create a new todo"""
 
-    def __init__(self, todo: Todo):
-        self.todo = todo
+    todo: Todo
 
 
 class CreateTodoHandler:

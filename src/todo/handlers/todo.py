@@ -3,7 +3,6 @@ from http import HTTPStatus
 from dependency_injector.wiring import Provide, inject
 from flask import Blueprint, abort, jsonify, request
 
-from src.extensions import db
 from src.todo.application.commands.create_todo import CreateTodoCommand
 from src.todo.application.queries.get_todo import GetTodoByID
 from src.todo.application.queries.list_todos import ListTodos
@@ -14,20 +13,13 @@ from src.todo.domain.todo import NotFoundError, Todo
 bp = Blueprint("todo", __name__, url_prefix="/todos")
 
 
-@bp.before_app_request
-def init_db():
-    """Create the database tables"""
-    db.create_all()
-
-
 @bp.route("/", methods=["POST"])
 @inject
 def create_todo(app: ServiceApplication = Provide[Container.service]):
     """Create a new todo"""
     try:
-        todo = Todo()
-        todo.title = request.json["title"]
-        app.create_todo(CreateTodoCommand(todo))
+        todo = Todo(title="dfdfdf")
+        app.create_todo(CreateTodoCommand(todo=todo))
         return jsonify(todo.to_dict()), HTTPStatus.CREATED
     except ValueError as e:
         abort(400, description=str(e))
@@ -51,7 +43,7 @@ def list_todos(app: ServiceApplication = Provide[Container.service]):
 def get_by_id(id, app: ServiceApplication = Provide[Container.service]):
     """Get a todo by id"""
     try:
-        todo = app.get_todo_by_id(GetTodoByID(id))
+        todo = app.get_todo_by_id(GetTodoByID(id=id))
         if not todo:
             abort(404, "Todo not found")
         return jsonify(todo.to_dict())
